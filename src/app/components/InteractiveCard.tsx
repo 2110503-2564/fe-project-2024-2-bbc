@@ -1,5 +1,6 @@
 'use client'
 import React from 'react';
+import styles from './hotelcard.module.css'
 
 export default function InteractiveCard({children , contentName}:{children:React.ReactNode,contentName:string}) {
 
@@ -15,7 +16,7 @@ export default function InteractiveCard({children , contentName}:{children:React
     }
       
     return (
-        <div className='w-full h-[300px] rounded-lg shadow-lg bg-white'
+        <div className={`${styles.cardImg} w-full h-[300px]  bg-white`}
         onMouseOver={(e)=>onCardMouseAction(e)}
         onMouseOut={(e)=>onCardMouseAction(e)}>
             {children}

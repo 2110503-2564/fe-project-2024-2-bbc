@@ -5,12 +5,17 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Logo() {
-  const [logoSrc, setLogoSrc] = useState("/icon/HIDDEN logo.svg");
+  const [logoSrc, setLogoSrc] = useState("/img/HIDDEN.png");
 
   return (
-    <Link href="/" className="block">
+    <Link 
+      href="/" 
+      className="block"
+      onMouseEnter={() => setLogoSrc("/img/HIDDEN_blue.png")}
+      onMouseLeave={() => setLogoSrc("/img/HIDDEN.png")}
+    >
       <Image
-        src={"/img/HIDDEN.png"}
+        src={logoSrc}
         alt="logo"
         width={90}
         height={2}

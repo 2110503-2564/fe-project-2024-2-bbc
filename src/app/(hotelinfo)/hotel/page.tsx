@@ -8,9 +8,9 @@ export default async function Hotel(){
     const hotels = await getHotels();
 
     return(
-        <main className="text-center p-5 min-h-screen bg-gradient-to-b from-white via-blue-50 to-blue-200">
+        <main className="text-center p-5 min-h-screen bg-slate-50">
             <Suspense fallback={<p>Loading ...<LinearProgress/></p>}>
-                <h1 className="text-[50px] font-medium bg-gradient-to-r from-blue-500 to-yellow-300 bg-clip-text text-transparent">
+                <h1 className="text-[50px] font-bold">
                     Select Your Hotel
                 </h1>
                 <HotelList hotelJson={hotels}/>
