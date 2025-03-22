@@ -12,7 +12,7 @@ export default async function TopMenu() {
 
   return (
 
-    <div className="h-[70px] bg-gradient-to-r from-blue-200 to-white fixed top-0 left-0 right-0 z-50 border-solid border-gray-600 flex justify-end">
+    <div className="h-[70px] bg-slate-50 fixed top-0 left-0 right-0 z-50  flex justify-end">
        <div className="m-5 flex items-center absolute left-0 h-full text-center mt-auto mb-auto font-san text-xs text-gray-600 font-extrabold gap-5">
             {
                 session?<Link href={"/api/auth/signout"}>

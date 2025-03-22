@@ -23,7 +23,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body>
+      <body className="bg-slate-50">
         <NextAuthProvider session={session}>
           <TopMenu/>
           {children}

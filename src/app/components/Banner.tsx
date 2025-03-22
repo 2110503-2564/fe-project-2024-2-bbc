@@ -51,12 +51,12 @@ export default function Banner() {
                 fill 
                 className={`absolute inset-0 object-cover transition-opacity duration-1000 ${fade ? 'opacity-100' : 'opacity-0'}`}
             />
+            <div className={styles.innerBorder}></div>
             {
                 session?<div className='z-30 absolute right-10 m-1 mt-5 font-semibold text-white text-lg'>
                     Welcome {session.user?.account.first_name +' '+session.user?.account.last_name}</div>
                 :null
             }
-            <div className={styles.bannerLinearGradient}></div>
             <div className={styles.bannerText}>
                 <h1 style={{marginBottom:"20px"}} className='text-4xl font-sans font-medium'>Your Dream Hotel</h1>
                 <h4 className='font-sans font-medium'>Effortlessly book your accommodation with our secure and streamlined booking system. Select your preferred hotel, choose your dates, and confirm your reservation with confidence.</h4>

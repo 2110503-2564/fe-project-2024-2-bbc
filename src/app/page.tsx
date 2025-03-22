@@ -5,7 +5,7 @@ import RecommendList from "./components/RecommendList";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-blue-200">
+    <main className="min-h-screen bg-slate-50">
       <Banner/>
       <RecommendList/>
     </main>
