@@ -17,6 +17,26 @@ export interface HotelItem{
     // bookings:
 }
 
+export interface HotelData{
+    hotel:{
+        address:{
+            city:string,
+            street_name:string,
+            street_address:string,
+            zipcode:string
+        },
+        location:{
+            latitude:number,
+            longtitude:number
+        }
+        _id:string,
+        hotel_name:string,
+        tel:string,
+        __v:number,
+        id:string
+    }
+}
+
 export interface HotelJson{
     count:number,
     hotels:HotelItem[]
@@ -45,9 +65,11 @@ export interface RoomItem{
     __v:number
 }
 
+// for /hotel/${hid}/rooms only!!! 
 export interface RoomJson{
     count:number,
-    rooms:RoomItem[]
+    hotel:HotelData,
+    room:RoomItem[]
 }
 
 export interface BookingItem{
