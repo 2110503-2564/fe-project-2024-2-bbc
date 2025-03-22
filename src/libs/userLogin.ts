@@ -1,6 +1,6 @@
 export default async function userLogin(userEmail:string,userPassword:string){
     
-    const response = await fetch(`${process.env.BACKEND_URL}/api/auth/login`,
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
         {
             method:'POST',
             headers:{

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { TextField, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -39,7 +39,7 @@ export default function RegisterPage() {
         }
 
         try {
-            const response = await fetch(`${process.env.BACKEND_URL}/api/auth/register`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
