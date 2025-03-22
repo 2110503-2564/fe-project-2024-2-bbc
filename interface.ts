@@ -65,6 +65,18 @@ export interface RoomItem{
     __v:number
 }
 
+export interface RoomData{
+    room:{
+        _id:string,
+        hotel_id:string,
+        room_number:string,
+        capacity:number,
+        price_per_night:number,
+        status:string,
+        __v:number
+    }
+}
+
 // for /hotel/${hid}/rooms only!!! 
 export interface RoomJson{
     count:number,

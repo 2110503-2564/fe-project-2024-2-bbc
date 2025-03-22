@@ -29,7 +29,7 @@ export default async function TopMenu() {
             {/* <TopMenuItem title="My Booking" pageRef="/mybooking/"/> */}
             <TopMenuItem title="Register" pageRef="/register/"/>
         </div>
-      <TopMenuItem title="Booking" pageRef="/" />
+      <TopMenuItem title="Booking" pageRef="/hotel" />
       <Logo />
     </div>
   );

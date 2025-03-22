@@ -10,6 +10,8 @@ export default async function RoomsList({rooms}:{rooms:RoomJson}){
             {
                 roomsJsonReady.room.map((roomItem:RoomItem)=>(
                     <RoomCard
+                    _id={roomItem._id}
+                    hotelid={roomItem.hotel_id}
                     roomNumber={roomItem.room_number}
                     roomCapacity={roomItem.capacity}
                     price={roomItem.price_per_night}

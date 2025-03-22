@@ -13,6 +13,8 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.8",
     "@mui/material": "^6.4.8",
+    "@mui/x-date-pickers": "^7.28.0",
+    "dayjs": "^1.11.13",
     "mongoose": "^8.12.1",
     "next": "14.2.5",
     "next-auth": "^4.24.8",
