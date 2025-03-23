@@ -98,9 +98,9 @@ export interface BookingItem{
 export interface BookingData{
     booking:{
         _id:string,
-        account_id:AccountItem,
-        hotel_id:HotelItem,
-        room_id:RoomItem,
+        account_id:string,
+        hotel_id:string,
+        room_id:string,
         status:string,
         num_people:number,
         check_in_date:string,

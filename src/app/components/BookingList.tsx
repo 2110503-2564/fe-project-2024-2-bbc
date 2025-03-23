@@ -8,18 +8,53 @@ import { removeBooking } from "@/redux/features/bookingSlice"
 import Link from "next/link"
 import deleteBooking from "@/libs/deleteBooking" // Import deleteBooking function
 import { useSession } from "next-auth/react"
-import { useState } from "react" // Import useState for error and success messages
+import { useEffect, useState } from "react" // Import useState for error and success messages
+import getHotel from "@/libs/getHotel"
+import getRoom from "@/libs/getRoom"
+
+import { HotelData , RoomData } from "../../../interface"
 
 export default function BookingList() {
     const bookingItems = useAppSelector((state) => state.bookSlice.bookItems)
     const dispatch = useDispatch<AppDispatch>()
     
     const { data: session } = useSession()
-    const token = session?.user.token
+    const token = session?.user?.token
 
     // State to manage error and success messages
     const [error, setError] = useState<string | null>(null)
     const [successMessage, setSuccessMessage] = useState<string | null>(null)
+
+    const [hotelData, setHotelData] = useState<{ [key: string]: HotelData }>({})
+    const [roomData, setRoomData] = useState<{ [key: string]: RoomData }>({})
+
+    useEffect(()=>{
+        const fecthHotelRoom = async() => {
+
+            const hotelDataMap: { [key: string]: HotelData } = {}
+            const roomDataMap: { [key: string]: RoomData } = {}
+
+            for(const bookingItem of bookingItems){
+                const hotelId = bookingItem.booking.hotel_id
+                const roomId = bookingItem.booking.room_id
+                
+                if (!hotelDataMap[hotelId]) {
+                    const hotel = await getHotel(hotelId)
+                    hotelDataMap[hotelId] = hotel
+                }
+
+                if (!roomDataMap[roomId]) {
+                    const room = await getRoom(roomId)
+                    roomDataMap[roomId] = room
+                }
+            }
+
+            setHotelData(hotelDataMap)
+            setRoomData(roomDataMap)
+
+        }
+        fecthHotelRoom()
+    },[bookingItems])
 
     const handleDeleteBooking = async (bookingId: string , bookingItem:BookingData) => {
         try {
@@ -68,12 +103,12 @@ export default function BookingList() {
             ) : (
                 bookingItems.map((bookingItem: BookingData) => (
                     <div key={bookingItem.booking._id} className="bg-slate-200 rounded p-5 m-5 font-sans font-bold flex flex-col">
-                        <div>{bookingItem.booking.hotel_id.hotel_name}</div>
-                        <div>{bookingItem.booking.room_id.room_number}</div>
-                        <div>{bookingItem.booking.num_people}</div>
-                        <div>{bookingItem.booking.check_in_date}</div>
-                        <div>{bookingItem.booking.check_out_date}</div>
-                        <div>{bookingItem.booking.status}</div>
+                        <div>Hotel: {hotelData[bookingItem.booking.hotel_id]?.hotel.hotel_name || "Loading..."}</div>
+                        <div>Room Number: {roomData[bookingItem.booking.room_id]?.room.room_number || "Loading..."}</div>
+                        <div>AmountOfPeoples: {bookingItem.booking.num_people}</div>
+                        <div>CheckIn Date: {bookingItem.booking.check_in_date}</div>
+                        <div>CheckOut Date: {bookingItem.booking.check_out_date}</div>
+                        <div>Status: {bookingItem.booking.status}</div>
 
                         <button
                             className="block rounded-md bg-red-600 hover:bg-red-800 px-3 py-2 text-white shadow-sm"

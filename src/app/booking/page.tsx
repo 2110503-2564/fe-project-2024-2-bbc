@@ -155,7 +155,13 @@ export default function Booking() {
             <form onSubmit={makeBooking}>
                 <div className="bg-slate-100 rounded-lg flex flex-col justify-center w-[100%] space-y-10 px-10 py-10 shadow-lg shadow-gray-500 mx-10">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <TextField type="number" required variant="standard" name="numpeople" label="Amount of People" value={numpeople} onChange={handlerNumPeopleChange} fullWidth />
+                        <TextField type="number" required variant="standard" name="numpeople" label="Amount of People" value={numpeople} onChange={handlerNumPeopleChange} 
+                        InputProps={{
+                            inputProps:{
+                                min:1
+                            }
+                        }}
+                        fullWidth />
                         <DatePicker label="Check-in Date" value={checkInDate} onChange={setCheckInDate} />
                         <DatePicker label="Check-out Date" value={checkOutDate} onChange={setCheckOutDate} />
                         <button type='submit' className="bg-blue-400 text-white rounded-lg w-[120px] h-[40px] font-bold shadow-lg transform transition-transform duration-500 hover:scale-[1.01] hover:bg-blue-600">Book Hotel</button>
