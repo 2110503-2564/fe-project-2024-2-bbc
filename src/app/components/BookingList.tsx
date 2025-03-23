@@ -77,6 +77,14 @@ export default function BookingList() {
 
     return (
         <>
+            {
+                session?.user?.role == 'user'&&(
+                    <div className="text-center text-[30px] font-bold">
+                        <p>Welcome "{session.user.account.first_name + ' ' +session.user.account.last_name}"</p>
+                        <p className="text-[25px]">Booking List</p>
+                    </div>
+                )
+            }
             {/* Display Error Message */}
             {error && (
                 <div className="bg-red-500 text-white text-center font-semibold rounded-lg p-3 shadow-md shadow-gray-500">
@@ -110,6 +118,14 @@ export default function BookingList() {
                         <div>CheckOut Date: {bookingItem.booking.check_out_date}</div>
                         <div>Status: {bookingItem.booking.status}</div>
 
+                        <Link href={`/mybooking/manage?bookingId=${bookingItem.booking._id}&hotelName=${hotelData[bookingItem.booking.hotel_id]?.hotel.hotel_name}`}>
+                            <button
+                                className="w-full block rounded-md bg-blue-500 hover:bg-blue-800 px-3 py-2 text-white shadow-sm"
+                            >
+                                Edit Booking
+                            </button>
+                        </Link>
+                        
                         <button
                             className="block rounded-md bg-red-600 hover:bg-red-800 px-3 py-2 text-white shadow-sm"
                             onClick={() => handleDeleteBooking(bookingItem.booking._id, bookingItem)} // Call handleDeleteBooking on click

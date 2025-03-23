@@ -20,8 +20,14 @@ export const bookSlice = createSlice({
             })
             state.bookItems = remainItem;
         },
+        updateBooking: (state, action: PayloadAction<BookingData>) => {
+            const index = state.bookItems.findIndex(book => book.booking._id === action.payload.booking._id);
+            if (index !== -1) {
+                state.bookItems[index] = action.payload;
+            }
+        }
     }
 })
 
-export const {addBooking,removeBooking} = bookSlice.actions
+export const {addBooking,removeBooking,updateBooking} = bookSlice.actions
 export default bookSlice.reducer

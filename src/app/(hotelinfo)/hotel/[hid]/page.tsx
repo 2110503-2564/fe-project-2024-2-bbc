@@ -10,8 +10,7 @@ export default async function HotelDetail({params}:{params:{hid:string}}){
     const hotelDetail:HotelData = await getHotel(params.hid)
     // console.log(hotelDetail)
     const hotelRooms:RoomJson = await getRooms(params.hid)
-    // console.log(hotelRooms)
-
+    
     return(
         <main>
             <HotelPageBanner hotelName={hotelDetail.hotel.hotel_name}/>

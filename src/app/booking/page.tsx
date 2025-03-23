@@ -13,6 +13,7 @@ import { useSession } from "next-auth/react";
 import getHotel from "@/libs/getHotel";
 import getRoom from "@/libs/getRoom";
 import userBooking from "@/libs/userBooking";
+import updateRoomStatus from "@/libs/updateRoomStatus";
 import { HotelData, RoomData } from "../../../interface";
 
 import Link from "next/link";
@@ -113,6 +114,14 @@ export default function Booking() {
                 checkInDate.format("YYYY-MM-DD"),
                 checkOutDate.format("YYYY-MM-DD")
             );
+
+            if(room?.room._id){
+                const status = "pending"
+                await updateRoomStatus(token,room?.room._id,status)
+                // console.log(msg)
+            }else{
+                console.log("Room Id is undefined")
+            }
             
             setSuccessMessage("Booking successful!");
             dispatch(addBooking(item));

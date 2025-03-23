@@ -3,7 +3,13 @@ export default async function getHotels(){
     // add timeout for loading delay testing
     // await new Promise((resolve)=>setTimeout(resolve,5000))
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/hotels`,{next:{tags:['hotels']}});
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/hotels`,{
+        next:{
+            tags:['hotels'],
+            revalidate:0
+        },
+        cache:'no-store',
+    });
     if(!response.ok){
         throw new Error("Failed to fetch hotels")
     }

@@ -84,11 +84,27 @@ export interface RoomJson{
     room:RoomItem[]
 }
 
+// for /mybooking/manage?bookingId=[]
+export interface BookingObject{
+    data:{
+        account_id:AccountItem,
+        check_in_date:string,
+        check_out_date:string,
+        createdAt:string,
+        hotel_id:HotelItem,
+        num_people:number,
+        room_id:RoomItem,
+        status:string,
+        updatedAt:string,
+        _id:string
+    }
+}
+
 export interface BookingItem{
     _id:string,
-    account_id:AccountItem,
-    hotel_id:HotelItem,
-    room_id:RoomItem,
+    account_id:string,
+    hotel_id:string,
+    room_id:string,
     status:string,
     num_people:number,
     check_in_date:string,
