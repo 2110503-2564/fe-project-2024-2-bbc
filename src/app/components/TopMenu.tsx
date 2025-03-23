@@ -17,7 +17,10 @@ export default async function TopMenu() {
             {
                 session?<Link href={"/api/auth/signout"}>
                     <div className="hover:text-blue-500">
-                        Sign-Out
+                        <div>
+                          Sign-Out
+                        </div>
+                        {session.user.account.first_name}
                     </div>
                 </Link>
                 :<Link href={"/api/auth/signin"}>
@@ -29,6 +32,7 @@ export default async function TopMenu() {
             {/* <TopMenuItem title="My Booking" pageRef="/mybooking/"/> */}
             <TopMenuItem title="Register" pageRef="/register/"/>
         </div>
+      <TopMenuItem title="My Booking" pageRef="/mybooking" />
       <TopMenuItem title="Booking" pageRef="/hotel" />
       <Logo />
     </div>

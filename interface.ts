@@ -95,6 +95,19 @@ export interface BookingItem{
     check_out_date:string
 }
 
+export interface BookingData{
+    booking:{
+        _id:string,
+        account_id:AccountItem,
+        hotel_id:HotelItem,
+        room_id:RoomItem,
+        status:string,
+        num_people:number,
+        check_in_date:string,
+        check_out_date:string
+    }
+}
+
 export interface BookingJson{
     count:number,
     data:BookingItem[]
