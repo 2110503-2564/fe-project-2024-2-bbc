@@ -1,8 +1,9 @@
 import Image from "next/image";
+import styles from "./banner.module.css";
 
 export default function HotelPageBanner({hotelName}:{hotelName:string}) {
     return (
-        <div className="relative mx-5 mb-10 w-[calc(100vw-40px)] h-[20vh] rounded-lg overflow-hidden shadow-lg">
+        <div className={`relative mx-5 mb-10 w-[calc(100vw-40px)] h-[20vh] overflow-hidden ${styles.bannerImg}`}>
             {/* Current image */}
             <Image 
                 src="/img/samplehotel.jpg"
@@ -10,8 +11,9 @@ export default function HotelPageBanner({hotelName}:{hotelName:string}) {
                 fill
                 className="object-cover transition-opacity duration-1000"
             />
-
-            <div className='absolute inset-0 bg-gradient-to-t from-[#232c36] to-transparent z-10'></div>
+            <div className={`${styles.bannerFade}`}></div>
+            <div className={`${styles.bannerLinearGradient}`}></div>
+            <div className={`${styles.innerBorder}`}></div>
 
             {/* Text content */}
             <div className="absolute bottom-10 left-2 right-2 text-white p-3 z-30">
