@@ -55,7 +55,7 @@ export default function Banner() {
             <div className={styles.innerBorder}></div>
             {
                 session?<div className='z-30 absolute right-10 m-1 mt-5 font-semibold text-white text-lg'>
-                    Welcome {session.user?.account.first_name +' '+session.user?.account.last_name}</div>
+                    Welcome {session.user?.account.role + ' ' + session.user?.account.first_name +' '+session.user?.account.last_name}</div>
                 :null
             }
             <div className={styles.bannerFade}></div>

@@ -38,7 +38,15 @@ export default function RoomCard({
             {/* Status */}
             <div className="flex justify-between mb-6">
                 <span className="font-bold">Status</span>
-                <span className={`font-semibold ${status === "pending" ? "text-yellow-600" : "text-green-600"}`}>
+                <span
+                    className={`font-semibold ${
+                        status === "pending"
+                            ? "text-yellow-600"
+                            : status === "booked"
+                            ? "text-red-600"
+                            : "text-green-600"
+                    }`}
+                >
                     {status}
                 </span>
             </div>
@@ -47,11 +55,15 @@ export default function RoomCard({
             <Link href={`/booking?hotelId=${hotelid}&roomId=${_id}`} passHref>
                 <button
                     className={`text-white font-medium p-2 rounded-lg ${
-                        status === "pending" ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-800"
+                        status === "pending" || status === "booked"
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : "bg-blue-500 hover:bg-blue-800"
                     }`}
-                    disabled={status === "pending"}
+                    disabled={status === "pending" || status === "booked"}
                 >
-                    {status === "pending" ? "Unavailable" : "Book Room"}
+                    {status === "pending" || status === "booked"
+                        ? "Booked"
+                        : "Book Room"}
                 </button>
             </Link>
         </div>

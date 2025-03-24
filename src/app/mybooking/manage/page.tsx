@@ -36,6 +36,7 @@ export default function Manage() {
     const [numPeople, setNumPeople] = useState<number>(1)
     const [roomNumber, setRoomNumber] = useState("")
     const [hotelId, setHotelId] = useState<string | undefined>(undefined);
+    const [status, setStatus] = useState("pending");
 
     const [prevRoomNumber, setPrevRoomNumber] = useState("") // Track previous room
 
@@ -67,7 +68,8 @@ export default function Manage() {
             setNumPeople(booking.data.num_people)
             setRoomNumber(booking.data.room_id.room_number)
             setPrevRoomNumber(booking.data.room_id.room_number) // Store initial room number
-            setHotelId(undefined);
+            setHotelId(booking.data.hotel_id._id);
+            setStatus(booking.data.status);
 
             // Fetch available rooms
             const rooms: RoomJson = await getRooms(booking.data.hotel_id._id)
@@ -145,12 +147,19 @@ export default function Manage() {
                     checkOutDate.format("YYYY-MM-DD"),
                     newRoom.room_number, // Use the room number of the new room
                     numPeople, // Ensure `numPeople` is defined
-                    "pending"
+                    status // Use dynamic status
                 );
     
                 dispatch(updateBooking(updatedBooking))
 
-                await updateRoomStatus(token,newRoom._id,"pending");
+                // Call to update room status based on status
+                if (status === "accept") {
+                    await updateRoomStatus(token, newRoom._id, "booked");
+                } else if (status === "reject") {
+                    await updateRoomStatus(token, newRoom._id, "available");
+                } else {
+                    await updateRoomStatus(token, newRoom._id, "pending");
+                }
                 
                 await fetchBooking()
                 
@@ -168,7 +177,6 @@ export default function Manage() {
             setIsLoading(false);
         }
     };
-    
 
     return (
         <main className="flex flex-col md:flex-row justify-center items-start gap-6 p-4 min-h-screen bg-gray-100">
@@ -251,11 +259,34 @@ export default function Manage() {
                             <DatePicker label="Check-in Date" value={checkInDate} onChange={setCheckInDate} />
                             <DatePicker label="Check-out Date" value={checkOutDate} onChange={setCheckOutDate} />
     
-                            <button type="submit" className="bg-blue-500 text-white p-2 rounded-lg">Update Booking</button>
+                            {/* Show status field only for hotel admins and super admins */}
+                            {(session?.user?.role === "hotel_admin" || session?.user?.role === "super_admin") && (
+                                <FormControl fullWidth variant="standard">
+                                    <InputLabel>Status</InputLabel>
+                                    <Select value={status} onChange={(e) => setStatus(e.target.value)}>
+                                        <MenuItem value="pending">Pending</MenuItem>
+                                        <MenuItem value="accept">Accept</MenuItem>
+                                        <MenuItem value="reject">Reject</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            )}
+                            
+                            {/* Show hotelId only for super admins */}
+                            {session?.user?.role === "super_admin" && (
+                                <TextField
+                                    label="Hotel ID"
+                                    value={hotelId}
+                                    onChange={(e) => setHotelId(e.target.value)}
+                                    fullWidth
+                                />
+                            )}
+    
+                            <button type="submit" className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-800">Update Booking</button>
                         </LocalizationProvider>
                     </div>
                 </form>
-                    {/* Error Box */}
+        
+                {/* Error Box */}
                 {error && (
                     <div className="w-full bg-red-500 text-white text-center font-semibold rounded-lg p-3 mt-10 shadow-md shadow-gray-500">
                         {error}
@@ -274,18 +305,6 @@ export default function Manage() {
                     </div>
                 )}
             </div>
-    
-            {/* Debugging State Values */}
-            {/* <div>
-                <div>Hotel Id: {hotelId}</div>
-                <div>Booking Id: {bookingId}</div>
-                <div>Num People: {numPeople}</div>
-                <div>Room Number: {roomNumber}</div>
-                <div>Previous Room Number: {prevRoomNumber}</div>
-                <div>Check-in: {checkInDate?.toString()}</div>
-                <div>Check-out: {checkOutDate?.toString()}</div>
-            </div> */}
         </main>
     );
-    
 }

@@ -51,6 +51,20 @@ export interface AccountItem{
     id:string
 }
 
+export interface AccountData{
+    role:string,
+    account:{
+        _id:string,
+        first_name:string,
+        last_name:string,
+        tel:string,
+        email:string,
+        id:string,
+        role:string,
+        create_at:string,
+    }
+}
+
 export interface AccountJson{
     data:AccountItem[]
 }
