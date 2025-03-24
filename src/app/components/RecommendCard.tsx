@@ -1,6 +1,6 @@
 import styles from "./recommendcard.module.css";
 
-export default function RecommendCard({ imgPos, imgSrc, textSection }: { imgPos: boolean, imgSrc: string, textSection: string }) {
+export default function RecommendCard({ imgPos, imgSrc, textSection, hotelName, Tel, address }: { imgPos: boolean, imgSrc: string, textSection: string, hotelName: string, Tel: string, address: any }) {
     return (
       <div className={`${styles.bannerImg} ${imgPos ? '' : 'justify-end'}`}>
         
@@ -12,15 +12,32 @@ export default function RecommendCard({ imgPos, imgSrc, textSection }: { imgPos:
             className={styles.Img}
           />
         </div>
+        <div>
+        <img
+            src={imgSrc}
+            alt="Recommended"
+            className={styles.Img}
+            style={{right:"50px", filter:"blur(20px)"}}
+          />
+        </div>
         <div className={styles.bannerFade}></div>
         <div className={styles.bannerLinearGradient}></div>
             <div className={styles.innerBorder}></div>
         {/* Text Section */}
-        <div className={`p-4 ${imgPos ? 'order-2' : 'order-1'} z-40`} style={{position:"absolute", left:"0", right:"0"}}>
-          <h1 className={`text-xl font-bold ${styles.TextHead}` }>Hotel Recommendation</h1>
+        <div className={`p-4 ${imgPos ? 'order-2' : 'order-1'} z-20`} style={{position:"absolute", left:"0", right:"30%"}}>
+          <h1 className={`text-4xl font-bold ${styles.TextHead}` }>{hotelName}</h1>
+          <p className={` font-medium ${styles.Text}`}>Tel: {Tel}</p>
           <p className={` font-medium ${styles.Text}`}>
-            {textSection}
+          City : {address.city} <br/>
+          Street: {address.treet_name} <br/>
+          Address: {address.street_addres} <br/>
+          Zipcode: {address.zipcode}     
           </p>
+        </div>
+        <div style={{left:"20%", top:"70px", position:"absolute", right:"20px", zIndex:"20"}}>
+        <p className={` font-medium ${styles.Text}`}>
+          {textSection}
+        </p>
         </div>
         
       </div>
