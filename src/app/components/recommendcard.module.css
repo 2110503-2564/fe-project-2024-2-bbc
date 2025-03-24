@@ -71,7 +71,7 @@
   height: 300px;
   padding: 10px;
   box-sizing: border-box;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(30px);
   border-radius: 5px; 
   background-color: rgba(240, 248, 255, 0.118);
   /* Mask for progressive blur effect */

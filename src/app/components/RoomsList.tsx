@@ -6,7 +6,7 @@ export default async function RoomsList({rooms}:{rooms:RoomJson}){
     const roomsJsonReady = await rooms;
     
     return(
-        <div className="items-center flex flex-col">
+        <div className="flex flex-wrap justify-center gap-4 px-4">
             {
                 roomsJsonReady.room.map((roomItem:RoomItem)=>(
                     <RoomCard

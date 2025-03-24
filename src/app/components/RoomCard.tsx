@@ -16,7 +16,9 @@ export default function RoomCard({
     status: string;
 }) {
     return (
-        <div className="bg-slate-200 w-[80%] m-5 p-5 text-[15px] rounded-lg shadow-lg relative">
+        <div className="bg-slate-50 m-0 p-5 text-[15px] rounded-lg shadow-lg relative
+        w-full sm:w-[48%] md:w-[40%] lg:w-[40%] xl:w-[23%]
+        " style={{border:"solid 1px #00000024"}}>
             {/* Room Number */}
             <div className="flex justify-between mb-3">
                 <span className="font-bold">Room Number</span>
@@ -54,7 +56,7 @@ export default function RoomCard({
             {/* Book Button at the bottom right */}
             <Link href={`/booking?hotelId=${hotelid}&roomId=${_id}`} passHref>
                 <button
-                    className={`text-white font-medium p-2 rounded-lg ${
+                    className={`text-white font-medium p-2 pl-5 pr-5 rounded-3xl ${
                         status === "pending" || status === "booked"
                             ? "bg-gray-400 cursor-not-allowed"
                             : "bg-blue-500 hover:bg-blue-800"
