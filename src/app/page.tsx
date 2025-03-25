@@ -7,7 +7,7 @@ import FloatButton from "./components/FloatButton";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-50" style={{paddingBottom:"30px"}}>
+    <main className="min-h-screen" style={{paddingBottom:"30px"}}>
       <Banner/>
       <hr className="my-6 border-t-2 border-gray-300" style={{ paddingBlock: "7px"}} />
       <RecommendList/>
