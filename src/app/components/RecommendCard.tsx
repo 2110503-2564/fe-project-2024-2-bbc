@@ -1,12 +1,9 @@
 import styles from "./recommendcard.module.css";
 
-export default function RecommendCard({ imgPos, imgSrc, textSection, hotelName, Tel, address , delay }: { imgPos: boolean, imgSrc: string, textSection: string, hotelName: string, Tel: string, address: any , delay: number }) {
+export default function RecommendCard({ imgPos, imgSrc, textSection, hotelName, Tel, address }: { imgPos: boolean, imgSrc: string, textSection: string, hotelName: string, Tel: string, address: any}) {
     return (
       <div
-      className={`${styles.bannerImg} ${imgPos ? "" : "justify-end"} ${styles.cardAnimation}`}
-      style={{
-        animationDelay: `${delay}s`, // Use the delay here for animation
-      }}
+      className={`${styles.bannerImg} ${imgPos ? "" : "justify-end"}`}
       >
         
         {/* Image Section */}
