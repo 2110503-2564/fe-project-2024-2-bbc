@@ -19,11 +19,20 @@ export default function BookingList() {
     const bookingItems = useAppSelector((state) => state.bookSlice.bookItems)
     const dispatch = useDispatch<AppDispatch>()
     
-    const { data: session } = useSession()
+    const { data: session , status } = useSession()
     const token = session?.user?.token
 
     // Loading state for fetching bookingItems
     const [loading, setLoading] = useState<boolean>(true)
+
+    // If loading, show the LinearProgress
+    if (loading || status === 'loading') {
+        return (
+            <div className="flex justify-center items-center mt-10">
+                <LinearProgress />
+            </div>
+        )
+    }
 
     if (!token) {
         return (
@@ -104,15 +113,6 @@ export default function BookingList() {
         }
         return bookingItem.booking.account_id === session?.user?.account._id // Show only own bookings for user
     })
-
-    // If loading, show the LinearProgress
-    if (loading) {
-        return (
-            <div className="flex justify-center items-center mt-10">
-                <LinearProgress />
-            </div>
-        )
-    }
 
     return (
         <>
