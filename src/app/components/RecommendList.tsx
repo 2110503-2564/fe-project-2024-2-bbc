@@ -18,9 +18,10 @@ export default async function RecommendList() {
           display: "flex",
           flexWrap: "wrap", 
           justifyContent: "space-between", 
-          width: "90%",
+          width: "95%",
         }}
       >
+        <h1 style={{fontSize:"30px", fontWeight:"800", marginBottom:"20px"}}>Our Top Hotels</h1>
         {hotels.hotels.map((hotelItem: HotelItem, index: number) => (
           <RecommendCard
             key={index}
