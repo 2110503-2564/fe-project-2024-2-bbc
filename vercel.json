@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/auth/register",
-      "destination": "http://13.229.133.248:5000/api/register"
+      "destination": "http://13.229.133.248:5000/api/auth/register"
     },
     {
       "source": "/api/auth/:path*",
