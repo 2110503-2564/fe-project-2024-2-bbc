@@ -1,8 +1,13 @@
 import styles from "./recommendcard.module.css";
 
-export default function RecommendCard({ imgPos, imgSrc, textSection, hotelName, Tel, address }: { imgPos: boolean, imgSrc: string, textSection: string, hotelName: string, Tel: string, address: any }) {
+export default function RecommendCard({ imgPos, imgSrc, textSection, hotelName, Tel, address , delay }: { imgPos: boolean, imgSrc: string, textSection: string, hotelName: string, Tel: string, address: any , delay: number }) {
     return (
-      <div className={`${styles.bannerImg} ${imgPos ? '' : 'justify-end'}`}>
+      <div
+      className={`${styles.bannerImg} ${imgPos ? "" : "justify-end"} ${styles.cardAnimation}`}
+      style={{
+        animationDelay: `${delay}s`, // Use the delay here for animation
+      }}
+      >
         
         {/* Image Section */}
         <div className={`w-1/4 mr-3  ${imgPos ? 'order-1' : 'order-2'}`}>
@@ -23,6 +28,7 @@ export default function RecommendCard({ imgPos, imgSrc, textSection, hotelName, 
         <div className={styles.bannerFade}></div>
         <div className={styles.bannerLinearGradient}></div>
             <div className={styles.innerBorder}></div>
+
         {/* Text Section */}
         <div className={`p-4 ${imgPos ? 'order-2' : 'order-1'} z-20`} style={{position:"absolute", left:"0", right:"30%"}}>
           <h1 className={`text-4xl font-bold ${styles.TextHead}` }>{hotelName}</h1>
