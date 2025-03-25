@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/api/auth/register",
+      "destination": "http://13.229.133.248:5000/api/register"
+    },
+    {
       "source": "/api/auth/:path*",
       "destination": "/api/auth/:path*"
     },
