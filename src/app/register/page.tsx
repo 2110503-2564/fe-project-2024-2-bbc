@@ -5,8 +5,8 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import React, { useState } from "react";
 
 export default function RegisterPage() {
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
+    const [first_name, setFirstname] = useState('');
+    const [last_name, setLastname] = useState('');
     const [tel, setTel] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -28,12 +28,13 @@ export default function RegisterPage() {
     const registerUser = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+        // Frontend validation
         if (password !== confirmedpassword) {
             setError('Passwords do not match');
             return;
         }
 
-        if(!firstname || !email || !password || !confirmedpassword || !lastname || !tel){
+        if(!first_name || !email || !password || !confirmedpassword || !last_name || !tel){
             setError("Please complete all inputs");
             return;
         }
@@ -45,8 +46,8 @@ export default function RegisterPage() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    first_name: firstname,
-                    last_name: lastname,
+                    first_name: first_name,
+                    last_name: last_name,
                     tel: tel,
                     email: email,
                     password: password,
@@ -54,20 +55,28 @@ export default function RegisterPage() {
                 })
             });
 
-            const data = await response.json();
-            console.log(data);
-
+            // Better error handling
             if (!response.ok) {
-                setError(data.message || 'Registration failed');
-                setSuccess('');
-            } else {
-                setSuccess(data.message || 'Registration successful');
-                setError('');
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || 'Registration failed');
             }
+
+            const data = await response.json();
+            setSuccess(data.message || 'Registration successful');
+            setError('');
+            
+            // Optional: Clear form on success
+            setFirstname('');
+            setLastname('');
+            setTel('');
+            setEmail('');
+            setPassword('');
+            setConfirmedPassword('');
+
         } catch (err) {
-            setError('An error occurred during registration');
+            setError(err instanceof Error ? err.message : 'An error occurred during registration');
             setSuccess('');
-            console.log(err);
+            console.error('Registration error:', err);
         }
     };
 
@@ -79,18 +88,18 @@ export default function RegisterPage() {
                     <TextField
                         type="text"
                         variant="standard"
-                        name="firstname"
+                        name="first_name"
                         label="First Name"
-                        value={firstname}
+                        value={first_name}
                         onChange={handlerFirstNameChange}
                         fullWidth
                     />
                     <TextField
                         type="text"
                         variant="standard"
-                        name="lastname"
+                        name="last_name"
                         label="Last Name"
-                        value={lastname}
+                        value={last_name}
                         onChange={handlerLastNameChange}
                         fullWidth
                     />
