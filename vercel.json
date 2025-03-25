@@ -1,13 +1,12 @@
 {
-    "rewrites": [
-      {
-        "source": "/api/auth/signin",
-        "destination": "/api/auth/signin"
-      },
-      {
-        "source": "/api/:path*",
-        "destination": "http://13.229.133.248:5000/api/:path*"
-      }
-    ]
-  }
-  
+  "rewrites": [
+    {
+      "source": "/api/auth/:path*",
+      "destination": "/api/auth/:path*"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "http://13.229.133.248:5000/api/:path*"
+    }
+  ]
+}
