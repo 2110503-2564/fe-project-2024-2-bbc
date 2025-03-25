@@ -35,7 +35,7 @@ export default async function HotelList({ hotelJson }: { hotelJson: HotelJson })
                   animationFillMode: "forwards",  
                 }}
               >
-                <HotelCard hotelName={hotelItem.hotel_name} imgSrc={'/img/samplehotel.jpg'} />
+                <HotelCard hotelName={hotelItem.hotel_name} imgSrc={hotelItem.image_url} />
               </div>
             </Link>
           ))

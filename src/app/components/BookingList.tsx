@@ -8,35 +8,10 @@ import getRoom from "@/libs/getRoom"
 import getUserBookings from "@/libs/getUserBookings"
 import DeleteBookingButton from "./DeleteBookingButton"
 
-<<<<<<< HEAD
-import { HotelData , RoomData } from "../../../interface"
-import LinearProgress from '@mui/material/LinearProgress'
-
-export default function BookingList() {
-    const bookingItems = useAppSelector((state) => state.bookSlice.bookItems)
-    const dispatch = useDispatch<AppDispatch>()
-    
-    const { data: session , status } = useSession()
-    const token = session?.user?.token
-
-    // Loading state for fetching bookingItems
-    const [loading, setLoading] = useState<boolean>(true)
-
-    // If loading, show the LinearProgress
-    if (loading || status === 'loading') {
-        return (
-            <div className="flex justify-center items-center mt-10">
-                <LinearProgress />
-            </div>
-        )
-    }
-
-=======
 export default async function BookingList() {
     const session = await getServerSession(authOptions)
     const token = session?.user?.token
 
->>>>>>> e6ff4b8f531565ba8044c3e5996b999d23b94cd0
     if (!token) {
         return (
             <div className="text-center text-[30px] font-bold mt-10 text-red-500 items-center justify-center">

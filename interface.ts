@@ -13,7 +13,8 @@ export interface HotelItem{
     hotel_name:string,
     tel:string,
     __v:number,
-    id:string
+    id:string,
+    image_url:string
     // bookings:
 }
 
