@@ -1,5 +1,5 @@
 export default async function getUserProfile(token:string){
-    const response = await fetch('${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/me',{
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/me`,{
         method:'GET',
         headers:{
             authorization:`Bearer ${token}`
