@@ -32,8 +32,8 @@ export default function UpdateBookingForm({
     const [checkOutDate, setCheckOutDate] = useState<dayjs.Dayjs | null>(dayjs(bookingData.data.check_out_date))
     const [numPeople, setNumPeople] = useState<number>(bookingData.data.num_people)
     const [roomNumber, setRoomNumber] = useState(bookingData.data.room_id.room_number)
-    const [hotelId, setHotelId] = useState(bookingData.data.hotel_id._id)
-    const [status, setStatus] = useState(bookingData.data.status)
+    const [hotelId, setHotelId] = useState(session.user.role === "super_admin" ? bookingData.data.hotel_id._id : undefined)
+    const [status, setStatus] = useState(session.user.role === "hotel_admin" || session.user.role === "super_admin" ? bookingData.data.status : undefined)
 
     const [prevRoomNumber, setPrevRoomNumber] = useState(bookingData.data.room_id.room_number)
     const [error, setError] = useState("")
@@ -83,12 +83,12 @@ export default function UpdateBookingForm({
                 const updatedBooking = await userUpdateBooking(
                     token,
                     bookingData.data._id,
-                    hotelId,
+                    hotelId, // This can be undefined for non-super admins
                     checkInDate.format("YYYY-MM-DD"),
                     checkOutDate.format("YYYY-MM-DD"),
                     newRoom.room_number,
                     numPeople,
-                    status
+                    status // This can be undefined for users
                 );
     
                 // Update room status based on booking status
