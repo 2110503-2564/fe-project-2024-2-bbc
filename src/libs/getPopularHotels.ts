@@ -13,6 +13,10 @@ export default async function getPopularHotels(){
       throw new Error("Failed to fetch hotels")
   }
 
-  return await response.json();
+  const result = await response.json();
+
+  console.log(result);
+
+  return result;
 
 }
